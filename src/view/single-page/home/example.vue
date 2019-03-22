@@ -14,11 +14,12 @@ export default {
   },
   methods: {
     resize () {
-      this.dom.resize()
+      this.dom.resize()// 调整大小
     }
   },
   mounted () {
     const option = {
+
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -101,14 +102,15 @@ export default {
         }
       ]
     }
+    // 在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
     this.$nextTick(() => {
       this.dom = echarts.init(this.$refs.dom)
-      this.dom.setOption(option)
-      on(window, 'resize', this.resize)
+      this.dom.setOption(option)// 设置表数据
+      on(window, 'resize', this.resize)// 注册浏览器窗口变化
     })
   },
   beforeDestroy () {
-    off(window, 'resize', this.resize)
+    off(window, 'resize', this.resize)// 解绑浏览器窗口事件
   }
 }
 </script>
